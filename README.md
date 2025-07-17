@@ -5,10 +5,10 @@ index
 </summary>
 
 1. [2025-07-16](#2025-07-16)
-    1. [git bash 기본 명령어](#git-bash-기본-명령어) 
-    2. [markdown](#markdown)
-    3. [git의 영역](#git의-영역)
-    4. [git의 동작 커맨드](#git의-동작-커맨드)
+    1. git bash 기본 명령어
+    2. markdown
+    3. git의 영역
+    4. git의 동작 커맨드
 2. [2025-07-17](#2025-07-17)
 </details>
 <details>
