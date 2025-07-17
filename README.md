@@ -155,8 +155,6 @@ git clone remote_repo_url : 원격 저장소 전체를 복제(다운로드)(clon
 .gitignore : 추적되지 않도록 설정하는 것
 (이미 git의 관리를 받은 파일이나 폴더는 적용되지 않음)
 
-git rm -cached : 
-
 git remote -v : 현재 로컬 저장소에 등록된 원격 저장소 목록 보기
 
 git remote rm 원격저장소이름 : 현재 로컬 저장소에 등록된 원격 저장소 삭제
@@ -175,7 +173,7 @@ git revert --no-commit 해쉬 : add만 하고 commit은 직접 실행해야함
 
 git reset [옵션] commit id :되돌리기, 특정 commit값으로 돌아갔을때 되돌아간 이후의 commit은 모두 삭제
 
-옵션)
+옵션>
 
 --soft : 삭제된 commit의 기록을 staging area에 남김
 
@@ -187,7 +185,7 @@ git reflog : head가 가리켰던 모든 commit을 보여줌
 
 git restore : modified 상태의 파일 되돌리기, 원래파일로 덮어쓴느 원리로 수정내용 전부 사라짐, 즉 되돌리기 이후 복구 불가능
 
-staging area에서 working directory로 되돌리기)
+staging area에서 working directory로 되돌리기
 
 git rm --cached : git저장소에 commit이 없는 경우
 
