@@ -1,12 +1,22 @@
 # 목차
-1. [2025-07-16](#2025-07-16-학습내용)
+<details>
+<summary>
+index
+</summary>
+
+1. [2025-07-16](#2025-07-16)
     1. [git bash 기본 명령어](#git-bash-기본-명령어) 
     2. [markdown](#markdown)
     3. [git의 영역](#git의-영역)
     4. [git의 동작 커맨드](#git의-동작-커맨드)
-2. [2025-07-17](#2025-07-17-학습내용)
+2. [2025-07-17](#2025-07-17)
+</details>
+<details>
+<summary>
 
-# [2025-07-16 학습내용](#목차)
+### 2025-07-16
+</summary>
+
 ## [git bash 기본 명령어](#목차)
 
 ---
@@ -122,8 +132,15 @@ code . : 현재 폴더에서 vscode 열기
 git commit --amend : vim 에디터가 열리면서 수정가능
 
 :wq : 저장(write) 후 vim 에디터 종료(quit)
+</details>
 
-## [2025-07-17 학습내용](#목차)
+<details>
+<summary>
+
+### 2025-07-17
+</summary>
+
+## [git 원격저장소 커맨드](#목차)
 
 git remote add origin(저장소 이름) remote_repo_url(추가하는 원격 저장소 주소) : 로컬 저장소에 원격 저장소 추가
 
@@ -175,3 +192,4 @@ staging area에서 working directory로 되돌리기)
 git rm --cached : git저장소에 commit이 없는 경우
 
 git restore --staged : git저장소에 commit이 있는 경우
+</details>
