@@ -93,7 +93,7 @@ code block
 
 수평선(단락구분) : ---
 
-표 세로선 : | (shift \)
+표 세로선 : | (shift \\)
 
 이모지 : :키워드: (git bash는 안됨 : 확장프로그램 설치 필요)
 
@@ -169,7 +169,7 @@ git remote -v : 현재 로컬 저장소에 등록된 원격 저장소 목록 보
 
 git remote rm 원격저장소이름 : 현재 로컬 저장소에 등록된 원격 저장소 삭제
 
-git revert <commit id>: 특정(단일) commit을 없었던 일로 만드는 작업, 프로젝트 기록에서 commit을 없었던 일로 처리 후 그 결과를 새로운 commit으로 추가함, 기록에서 commit이 사라지지는 않음
+git revert <commit_id>: 특정(단일) commit을 없었던 일로 만드는 작업, 프로젝트 기록에서 commit을 없었던 일로 처리 후 그 결과를 새로운 commit으로 추가함, 기록에서 commit이 사라지지는 않음
 
 변경사항을 안전하게 실행 취소할 수 있도록 도와주는 순방향 실행 취소 작업
 
@@ -181,7 +181,7 @@ git revert --no-edit 해쉬 : edit창 열지않고 바로 실행
 
 git revert --no-commit 해쉬 : add만 하고 commit은 직접 실행해야함
 
-git reset [옵션] commit id :되돌리기, 특정 commit값으로 돌아갔을때 되돌아간 이후의 commit은 모두 삭제
+git reset [옵션] commit_id :되돌리기, 특정 commit값으로 돌아갔을때 되돌아간 이후의 commit은 모두 삭제
 
 옵션>
 
@@ -222,7 +222,7 @@ interface : 서로 다른 두개의 시스템(기기, 소프트웨어 등)이 �
 
 클라이언트와 서버 구조 
 
-![이미지](/c/Users/SSAFY/Desktop/김승철/TIL/클라이언트와서버구조.png)
+![이미지](/c/Users/SSAFY/Desktop/김승철/TIL/클라이언트와서버구조.jpg)
 
 api key : api에게 요청을 보내는 애플리케이션을 구별하기 위한 교유한 식별 문자열
 
