@@ -1,6 +1,6 @@
 T = int(input())
 
-for test_case in range(T):
+for test_case in range(1, T + 1):
     N = int(input())
     num = list(map(int, input().split()))
 
@@ -9,4 +9,5 @@ for test_case in range(T):
         for j in range(i):
             if num[j] > num[j+1]:
                 num[j], num[j+1] = num[j+1], num[j]
-    print(f'#{test_case+1} ', num[-1] - num[0])
+
+    print(f'#{test_case} ', num[-1] - num[0])
