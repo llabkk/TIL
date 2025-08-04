@@ -64,7 +64,101 @@ arr = list(map(int, input.split())) # arr = [2, 7, 5, 3, 1, 4]
 ```
 
 #### 연습문제
+연습문제1 : N개의 양의 정수에서 가장 큰 수와 가장 작은 수의 차이를 출력하세요.
+- 입력
+  - 첫 줄에 테스트 케이스의 수 T가 주어진다. (1<= T <= 50)
+  - 각 케이스의 첫 줄에 양수의 개수 N이 주어진다. (5<= N <= 1000)
+  - 다음 줄에 N개의 양수 ai가 주어진다. (5<= ai <= 1000000)
+- 출력
+  - 각 줄마다 "#T"(T는 테스트 케이스 번호)를 출력한 뒤, 빈칸에 이어 답을 출력한다.
 
+```
+T = int(input())
+
+for test_case in range(1, T + 1):
+    N = int(input())
+    num = list(map(int, input().split()))
+
+    # num.sort(), 버블 정렬
+    for i in range(N-1, 0, -1):
+        for j in range(i):
+            if num[j] > num[j+1]:
+                num[j], num[j+1] = num[j+1], num[j]
+
+    print(f'#{test_case} ', num[-1] - num[0])
+```
+
+연습문제2 : 상자들이 쌓여있는 방이 있다. 방이 오른쪽으로 90도 회전하여 상자들이 중력의 영향을 받아 낙하한다고 할 때, 낙차가 가장 큰 상자를 구하여 그 낙차를 리턴하는 프로그램을 작성하시오.
+- 중력은 회전이 완료된 후 적용
+- 상자들은 모두 한쪽 벽면에 붙여진 상태로 쌓여 2차원의 형태를 이루며 벽에서 떨어져서 쌓인 상자는 없다.
+- 상자의 가로, 세로의 길이는 1이다.
+- 방의 가로, 세로길이는 최대 100이다.
+- 즉, 상자는 최소 0 최대 100높이로 쌓일 수 있다.
+- 상자가 놓인 가로 칸의 수 N, 다음줄에 각 칸의 상자 높이가 주어진다.
+
+입력 예시
+- 9
+- 7 4 2 0 0 6 0 7 0
+
+```
+# 상자가 놓인 가로 칸의 수 입력
+N = int(input())
+# 각 칸의 상자 높이 입력
+height = list(map(int, input().split()))
+# 현재 낙차를 계산하는 박스의 높이
+box = 0
+# 현재 낙차
+fall = 0
+# 최대 낙차
+max_fall = 0
+ 
+# 인덱스[0] 부터 반복
+for i in range(N):
+    # 현재 낙차를 계산하는 상자가 인덱스[i]의 상자보다 높은 경우
+    if box > height[i]:
+        # 현재 낙차 1증가
+        fall += 1
+        # 현재 낙차가 최대 낙차보다 큰 경우
+        if max_fall < fall:
+            max_fall = fall
+    # 현재 낙차를 계산하는 상자가 인덱스[i]의 상자와 낮거나 같은 경우
+    elif box <= height[i]:
+        # 현재 낙차가 최대 낙차보다 큰 경우
+        if max_fall < fall:
+            max_fall = fall
+        # 낙차 초기화
+        fall = 0
+        # 낙차 계산하는 박스 변경
+        box = height[i]
+ 
+# 상자가 무조건 떨어지는 높이
+base = 0
+# 인덱스[-1]부터 역순으로 반복
+for j in range(N-1, 0, -1):
+    # 박스를 만나면 반복 끝
+    if height[j] != 0:
+        break
+    # 박스를 만나기전이면 base 1 증가
+    base +=1
+     
+# 최대 낙차와 base의 합 출력
+print(max_fall + base)
+```
+
+```
+N = int(input())
+box = list(map(int, input().split()))
+
+max_v = 0
+for i in range(N-1):
+    cnt = 0         # i박스 오른쪽(i+1~N-1)에 더 낮은 박스 개수 (낙차)
+    for j in range(i+1, N):
+        if box[i] > box[j]:
+            cnt += 1    # 더 낮은 박스면 낙차 추가
+    if max_v < cnt:
+        max_v = cnt
+print(max_v)
+```
 
 #### 버블 정렬(Bubble Sort)
 정렬(sort) : 2개 이상의 자료를 키(특정 기준)에 의해 작은 값부터 큰 값(오름차순) 혹은 그 반대의 순서대로(내림차순) 재배열하는 알고리즘
