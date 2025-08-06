@@ -1,3 +1,6 @@
+import sys
+sys.stdin = open("연습문제1_in.txt", "r")
+
 T = int(input())
 
 for tc in range(T):
@@ -14,4 +17,22 @@ for tc in range(T):
             nj = 2 + dj * c
             if 0 <= ni < 5 and 0 <= nj < 5:
                 s += lst[ni][nj]
+    print(s)
+
+# 아래는 강사님 풀이
+T = int(input())
+
+for tc in range(T):
+    N = int(input())
+
+    matrix = [list(map(int, input().split())) for _ in range(N)]
+
+    s = 0
+
+    for i in range(N):
+        s += matrix[i][i]
+        s += matrix[i][N-1-i]
+    if N % 2 == 1:
+        s -= matrix[N//2][N//2]
+
     print(s)
