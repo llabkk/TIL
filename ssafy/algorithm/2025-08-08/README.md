@@ -11,7 +11,7 @@
 - 1967년, 미국에서 ASCII(American Standard Code Information Interchange)라는 문자 인코딩 표준이 제정됨
 - ASCII는 7-bit 인코딩으로 128문자를 표현하며 33개의 출력 불가능한 제어 문자들과 공백을 비롯한 95개의 출력 문자들로 이루어짐
 
-![출력가능한 아스키 문자(32~126)](/c/Users/SSAFY/Desktop/ksc/TIL/ssafy/algorithm/2025-08-08/"출력가능아스키.png")
+![출력가능한 아스키 문자(32~126)](출력가능아스키.png)
 
 확장 아스키(Extended ASCII)
 - 표준 문자 이외의 악센트 문자, 도형 문자, 특수 문자, 특수 기호 등 부가적인 문자를 128개 추가
