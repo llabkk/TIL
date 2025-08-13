@@ -6,10 +6,10 @@
 n! : n에 대한 factorial
 ```python
 def factorial(n):
-    if n > 0:
-        return n * factorial(n-1)
+    if n == 1:
+        return 1
     else:
-      return 1
+        return n * factorial(n-1)
 ```
 
 피보나치 수열 : 0과 1로 시작하고 이전의 두 수 합을 다음 항으로 하는 수열
