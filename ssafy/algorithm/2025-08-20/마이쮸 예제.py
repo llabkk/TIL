@@ -2,7 +2,7 @@ from collections import deque
 p = 1  # 처음 줄 설 사람 번호
 #q = []
 q = deque()
-N = 1000000  # 초기 마이쮸 개수
+N = 100  # 초기 마이쮸 개수
 m = 0   # 나눠준 개수
 v = 0
 
