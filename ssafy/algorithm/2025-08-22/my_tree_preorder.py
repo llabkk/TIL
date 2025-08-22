@@ -78,13 +78,18 @@ for j in range(1, N+1):
         root = j
         break
 
+print("DFS")
 DFS()
 print()
 
+print("전위 순회")
 preorder(root)
 print()
 
+print("중위 순회")
 inorder(root)
 print()
 
+print("후위 순회")
 postorder(root)
+
