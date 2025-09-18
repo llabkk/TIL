@@ -80,20 +80,23 @@ def prim(start_node, start_price):
     answer = 0
     
     # node방문 확인
-    ban = [0] * V
+    mst = [0] * V
 
-    while pq:
+    v_cnt = 0
+
+    while v_cnt < V and pq:
         price, node = heappop(pq)
 
-        if ban[node]:
+        if mst[node]:
             continue
 
-        ban[node] = 1
+        mst[node] = 1
+        v_cnt += 1
 
         answer += price
 
         for w, next_node in graph[node]:
-            if ban[next_node]:
+            if mst[next_node]:
                 continue
             heappush(pq, (w, next_node))
     
