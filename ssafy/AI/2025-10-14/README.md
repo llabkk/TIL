@@ -1,3 +1,199 @@
+## easy
+### EDA(Exploratory Data Analysis)
+- 탐색적 데이터 분석 EDA은 거창한 전문적 분석 뿐만이 아닌, 데이터를 살펴보는 행동
+- EDA 작업은 주로 Pandas와 Seaborn으로 하는 것이 편리
+
+### seaborn
+- dataframe 생성: df = seaborn.load_dataset(data)
+- 데이터 프레임 정보 확인: df.info()
+- 데이터 통계 확인 : df.dexcrobe()
+- data 점으로 출력: seaborn.scaterplot(data=df, x=x_label, y=y_label)
+- 선형 회귀선 출력: seaborn.regplot(data=df, x=x_label, y=y_label)
+
+- 상관계수(Correlation coefficient): 두 변수가 얼마나 상관이 있는지에 관한 수치
+  - 상관계수는 -1 ~ 1 사이의 값을 갖습니다.
+  - 값 예시
+    - +1 : 완전한 양의 상관관계, 무조건 같이 오름 (무게 UP시, 가속도 UP)
+    - +0.7 : 강한 양의 상관관계, 거의 같이 오름
+    - 0 : 상관없음
+    - -0.7 : 강한 음의 상관관계, 거의 반대로 동작
+    - -1 : 완전한 음의 상관관계, 무조건 반대로 동작 (무게 UP시, 가속도 Down)
+- 상관계수 계산: corr = seaborn.corr(numeric_only=(True or False))
+  - numeric_only: True인 경우에는 int, float과 같은 연속된 숫자 입력만 사용
+- 히트맵 출력(상관계수를 행렬로 출력): seaborn.heatmap(corr, mask=mask annot=True, cmap='coolwarm', linewidths=1)
+  - 메타변수
+    - corr: 데이터
+    - mask: 특정영역 가리기
+    - annot: 값 표시 여부(True 사용시 칸에 상관계수 값 출력)
+    - cmap: 색상 팔레트(coolwarm:놓으면 빨간색, 낮으면 파란색)
+    - linewidths: 셀 사이 경계선 두께
+
+### 분포(Disribution)
+- 분포: 데이터가 퍼져있는 모양
+- 히스토그램 시각화(분포 확인 시 사용): df = sns.load_dataset(data)
+
+### 분산
+- 분산: 평균 기준으로 얼마나 퍼져있는지를 나타내는 수치
+- 표준편차: 분산의 제곱근
+
+### pairplot(): 한방 차트
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = sns.load_dataset("mpg")
+
+# 마력에 결측치 제거 (pairplot은 결측치(NaN)값 있으면 에러 납니다.)
+df = df.dropna(subset=["horsepower"])
+
+# pairplot 시각화
+sns.pairplot(df[["weight", "horsepower", "acceleration"]], corner=True, kind="reg", plot_kws={'line_kws': {'color': 'red'}})
+```
+
+### scikit-learn: 머신러닝 대표 라이브러리
+  - 1. Scikit-Learn : 머신러닝 대표 라이브러리
+  - 2. TensorFlow : 머신러닝 중 딥러닝에 특화된 라이브러리
+  - 3. PyTorch : 머신러닝 중 딥러닝에 특화된 라이브러리 (코드 간결성이 더 높음)
+
+- 선형회귀
+```python
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# 1. 데이터 불러오기
+tips = sns.load_dataset("tips")
+X = tips["total_bill"].values.reshape(-1, 1)  # 2차원으로 변환, -1 은 'n' 이라는뜻 입니다.
+y = tips["tip"].values
+
+# 모델 생성 및 학습
+model = LinearRegression() # 아직 학습 안된 모델객체 생성
+model.fit(X, y) #X, y로 학습시작 (내부적으로 GD 안하고 정규방정식으로 한방에 최적 a, b를 계산함)
+
+# 예측
+y_hat = model.predict(X)
+
+# 시각화
+plt.scatter(X, y, color='blue', alpha=0.6, label='Actual Data')
+plt.plot(X, y_hat, color='red', linewidth=2, label='Regression Line')
+
+plt.xlabel("Total Bill ($)")
+plt.ylabel("Tip ($)")
+plt.title("Linear Regression: Total Bill vs Tip")
+plt.legend()
+plt.show()
+```
+
+- 로지스틱 회귀
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+
+# 공부 시간 (입력값)
+X = np.array([1,2,3,4,5,6,2,3,4,5,6,7,1,2,3,4,5,6,7,8,2,3,4,5,6,7,8,9,10]).reshape(-1, 1)
+
+# 합격 여부 (출력값)
+y = np.array([0,0,0,1,1,1,0,0,1,1,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,1,1])
+
+model = LogisticRegression()
+model.fit(X, y)
+
+X_new = np.linspace(0, 11, 200).reshape(-1, 1) # 0~11시간까지 세밀하게
+y_hat = model.predict_proba(X_new) # [탈락확률, 합격확률]
+y_hat = y_hat[:, 1] # 합격 확률만 추출
+
+plt.figure(figsize=(8, 5))
+plt.plot(X_new, y_hat, color='red', linewidth=2)
+plt.xlabel("Study Time")
+plt.ylabel("Pass Probability")
+plt.grid(True)
+```
+
+### 표준화(전처리)
+- 표준화: 데이터를 평균 0, 표준편차 1 형태로 바꾸는 전처리
+  - 정규화는 값의 범위를 조율하는 행동 자체를 말합니다.
+  - 표준화는 "평균 0, 표준편차 1"로 정규화 하는 것을 말합니다.
+  - 표준화는 정규화 행동 중 하나입니다.
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+tips = sns.load_dataset("tips")
+
+X = tips["total_bill"].values.reshape(-1, 1)  # 2차원으로 변환 (n, 1)
+y = tips["tip"].values.reshape(-1, 1)
+
+# 표준화를 해주는 객체만 생성
+scaler_X = StandardScaler()
+scaler_y = StandardScaler()
+
+# 표준화 하기
+scaler_X.fit(X) # fit : 평균과 표준편차 계산하여 내부 변수에 저장해둠
+scaler_y.fit(y)
+X_std = scaler_X.transform(X) # 변환 (변환 수식에 원본의 평균과 표준편차 값이 필요)
+y_std = scaler_y.transform(y)
+```
+
+### 모델 평가
+- 모델 평가 이유: 학습 도중에 중간 평가를 하여, 학습을 조율하기 위함 (더 나은 학습을 위해)
+
+- 평가를 하려면, 학습에 사용하지 않은 데이터로 평가를 해야합니다.
+- 일반적인 AI 학습에서는 전체 데이터를 3개의 데이터로 나누는 것이 일반적입니다.
+  - **Train Set**
+    - 학습용 데이터로 80% 정도 사용합니다.
+  - **Validation Set**
+    - 검증용 데이터, 학습 중간 중간 평가를 하여 학습 방법을 조율합니다.
+    - Validation Set 결과로 학습률(lr.. 점프거리)를 조율하거나 학습을 중단하기도 합니다.
+  - **Test Set**
+    - 처음보는 데이터로 모델을 평가
+
+```python
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+tips = sns.load_dataset("tips")
+X = tips["total_bill"].values
+y = tips["tip"].values
+
+print(f'원본 개수 : {X.size}개')
+
+# 데이터를 2개로 분리
+# X_train, Y_train = 0.8 (80%)
+# X_test, Y_test = 0.2 (20%)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) # 랜덤으로 섞어줌
+```
+
+- 선형회귀 모델에서 대표적인 평가지표
+    - MSE와 R²이 있습니다.
+    - MSE
+    - 오차의 제곱한 값들의 평균입니다.
+    - 0에 가까울수록 성능이 가장 좋습니다.
+    - Loss(Error)를 계산할 때도 쓰이지만, 모델을 평가할 때도 쓰일수 있습니다.
+    - R²(결정계수)
+    - 모델이 데이터의 흐름을 잘 예측하고 있는지 평가합니다.
+    - 결과는 0 ~ 1 값인데, 1에 가까울수록 성능이 좋습니다.
+    - 상세한 내용은 Easy 교안에서 다루지 않습니다.
+
+- 로지스틱 회귀에서 대표적인 평가 지표
+  - Accuracy, F1-score, AUC 가 있습니다.
+  - 참고로 크로스엔트로피는 Loss 함수로는 자주 쓰이지만, 평가용으로 쓰기에는 출력값을 설명하기 모호하여 사용하지 않습니다.
+    - Accuracy(정확도)
+      - 전체 테스트 데이터 중에 모델이 정답을 얼마나 맞췄는지 비율입니다.
+      - 결과는 0 ~ 1 값인데, 1에 가까울수록 성능이 좋습니다.
+    - F1-score
+      - 모델이 정확히 1(합격)이라고 맞춘 것과, 1을 놓치지 않은 것의 비율입니다.
+      - 결과는 0 ~ 1 값인데, 1에 가까울수록 성능이 좋습니다.
+    - AUC (ROC-AUC)
+      - 모델이 0(탈락)과 1(합격)을 잘 구분하는 정도를 나타냅니다.
+      - 결과는 0 ~ 1 값인데, 1에 가까울수록 성능이 좋습니다.
+      - 0인데 1로 잘못된 예측을 한것과, 실제 1로 맞춘 비율을 선으로 그렸을 때 아래 면적 크기를 나타냅니다.
+
+## hard
 ### 선형회귀: 입력과 출력의 선형 관계를 찾는 방법
 선형회귀
 - 입력 변수와 출력 변수 사이의 관계를 직선 형태로 근사하여, 예측하는 통계적 방법
